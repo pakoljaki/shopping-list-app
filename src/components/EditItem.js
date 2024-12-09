@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './EditItem.css';
+import MyButton from './MyButton';
 
 const EditItem = () => {
   const [item, setItem] = useState({ name: '', label: '', quantity: '', price: '' });
@@ -47,45 +49,53 @@ const EditItem = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Edit Item</h2>
-      <input
-        type="text"
-        name="name"
-        placeholder="Item Name (required)"
-        value={item.name}
-        onChange={handleChange}
-        required
-      />
-      <select
-        name="label"
-        value={item.label}
-        onChange={handleChange}
-      >
-        <option value="">Select Label (optional)</option>
-        <option value="Fruit">Fruit</option>
-        <option value="Vegetable">Vegetable</option>
-        <option value="Meat">Meat</option>
-        <option value="Dairy">Dairy</option>
-        <option value="Bakery">Bakery</option>
-      </select>
-      <input
-        type="number"
-        name="quantity"
-        placeholder="Quantity (optional)"
-        value={item.quantity}
-        onChange={handleChange}
-      />
-      <input
-        type="number"
-        step="0.01"
-        name="price"
-        placeholder="Price (optional)"
-        value={item.price}
-        onChange={handleChange}
-      />
-      <button type="submit">Save Changes</button>
-    </form>
+    <div className="edit-item-container">
+      <form className="edit-item-form" onSubmit={handleSubmit}>
+        <h2>Edit Item</h2>
+        <label>Item Name (required):</label>
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter item name"
+          value={item.name}
+          onChange={handleChange}
+          required
+        />
+        <label>Category (optional):</label>
+        <select
+          name="label"
+          value={item.label}
+          onChange={handleChange}
+        >
+          <option value="">Select a category</option>
+          <option value="Fruit">Fruit</option>
+          <option value="Vegetable">Vegetable</option>
+          <option value="Meat">Meat</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Bakery">Bakery</option>
+        </select>
+        <label>Quantity (optional):</label>
+        <input
+          type="number"
+          name="quantity"
+          placeholder="Enter quantity"
+          value={item.quantity}
+          onChange={handleChange}
+        />
+        <label>Price (optional):</label>
+        <input
+          type="number"
+          step="0.01"
+          name="price"
+          placeholder="Enter price"
+          value={item.price}
+          onChange={handleChange}
+        />
+        <MyButton type="submit" variant="success">
+          Save Changes
+        </MyButton>
+      </form>
+    </div>
   );
 };
 

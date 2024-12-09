@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './index.css';
-import App from './App';
+//import App from './App';
 import Register from './components/Register';
 import Login from './components/Login';
 import Settings from './components/Settings';
@@ -11,6 +11,7 @@ import AddItem from './components/AddItem';
 import Layout from './components/Layout'; // Import the Layout component
 import EditItem from './components/EditItem';
 import About from './components/About';
+import Statistics from './components/Statistics';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -56,21 +57,29 @@ root.render(
         }
       />
       <Route
-    path="/edit-item/:id"
-    element={
-      <Layout>
-        <EditItem />
-      </Layout>
-    }
-  />
-  <Route
-    path="/about"
-    element={
-      <Layout>
-        <About />
-      </Layout>
-    }
-  />
+        path="/edit-item/:id"
+        element={
+          <Layout>
+            <EditItem />
+          </Layout>
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          <Layout>
+            <About />
+          </Layout>
+        }
+      />
+      <Route
+        path="/statistics"
+        element={
+          <Layout>
+            <Statistics />
+          </Layout>
+        }
+      />
     </Routes>
   </Router>
 );

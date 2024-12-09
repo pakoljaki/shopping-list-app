@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import './MyNavbar.css';
-
 
 const MyNavbar = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
+    <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">Shopping App</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -20,6 +18,8 @@ const MyNavbar = () => {
             <Nav.Link as={Link} to="/shopping-list">Shopping List</Nav.Link>
             <Nav.Link as={Link} to="/add-item">Add Item</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
+            {/* Add link to Statistics */}
+            <Nav.Link as={Link} to="/statistics">Statistics</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
