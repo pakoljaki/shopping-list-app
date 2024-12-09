@@ -1,0 +1,30 @@
+/* General Button Styles */
+.button {
+    margin: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none; /* For links styled as buttons */
+    display: inline-block;
+  }
+  
+  /* Specific Styles for Edit and Delete Buttons */
+  .button.edit {
+    background-color: blue;
+  }
+  
+  .button.edit:hover {
+    background-color: darkblue;
+  }
+  
+  .button.delete {
+    background-color: red;
+  }
+  
+  .button.delete:hover {
+    background-color: darkred;
+  }
+  
