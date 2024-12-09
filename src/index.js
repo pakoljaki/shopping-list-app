@@ -10,6 +10,9 @@ import ShoppingList from './components/ShoppingList';
 import AddItem from './components/AddItem';
 import Layout from './components/Layout'; // Import the Layout component
 import EditItem from './components/EditItem';
+import About from './components/About';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -57,6 +60,14 @@ root.render(
     element={
       <Layout>
         <EditItem />
+      </Layout>
+    }
+  />
+  <Route
+    path="/about"
+    element={
+      <Layout>
+        <About />
       </Layout>
     }
   />
