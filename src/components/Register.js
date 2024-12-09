@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './Register.css'; // Import CSS for styling
+import MyButton from './MyButton'; // Import MyButton component
 
 const Register = () => {
   const [formData, setFormData] = useState({ email: '', username: '', password: '' });
@@ -18,16 +20,50 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="register-container">
       <h2>Register</h2>
-      <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-      <input type="text" name="username" placeholder="Username" onChange={handleChange} required />
-      <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-      <button type="submit">Register</button>
-      <p>
+      <form className="register-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-actions">
+          <MyButton variant="primary" type="submit">Register</MyButton>
+        </div>
+      </form>
+      <p className="login-link">
         Already have an account? <Link to="/login">Login here</Link>
       </p>
-    </form>
+    </div>
   );
 };
 

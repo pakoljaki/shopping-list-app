@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './AddItem.css'; // Import the CSS file
+import MyButton from './MyButton'; // Import the MyButton component
 
 const AddItem = () => {
   const [item, setItem] = useState({ name: '', label: '', quantity: '', price: '' });
@@ -32,45 +34,60 @@ const AddItem = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="add-item-container">
       <h2>Add Item</h2>
-      <input
-        type="text"
-        name="name"
-        placeholder="Item Name (required)"
-        value={item.name}
-        onChange={handleChange}
-        required
-      />
-      <select
-        name="label"
-        value={item.label}
-        onChange={handleChange}
-      >
-        <option value="">Select Label (optional)</option>
-        <option value="Fruit">Fruit</option>
-        <option value="Vegetable">Vegetable</option>
-        <option value="Meat">Meat</option>
-        <option value="Dairy">Dairy</option>
-        <option value="Bakery">Bakery</option>
-      </select>
-      <input
-        type="number"
-        name="quantity"
-        placeholder="Quantity (optional)"
-        value={item.quantity}
-        onChange={handleChange}
-      />
-      <input
-        type="number"
-        step="0.01"
-        name="price"
-        placeholder="Price (optional)"
-        value={item.price}
-        onChange={handleChange}
-      />
-      <button type="submit">Add Item</button>
-    </form>
+      <form className="add-item-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">Item Name (required):</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter item name"
+            value={item.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="label">Category (optional):</label>
+          <select id="label" name="label" value={item.label} onChange={handleChange}>
+            <option value="">Select a category</option>
+            <option value="Fruit">Fruit</option>
+            <option value="Vegetable">Vegetable</option>
+            <option value="Meat">Meat</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Bakery">Bakery</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="quantity">Quantity (optional):</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            placeholder="Enter quantity"
+            value={item.quantity}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="price">Price (optional):</label>
+          <input
+            type="number"
+            step="0.01"
+            id="price"
+            name="price"
+            placeholder="Enter price"
+            value={item.price}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-actions">
+          <MyButton variant="primary" type="submit">Add Item</MyButton>
+        </div>
+      </form>
+    </div>
   );
 };
 

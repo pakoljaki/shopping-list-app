@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ShoppingList.css';
-
+import MyButton from './MyButton';
 
 const ShoppingList = () => {
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState(''); // State to hold the current filter
+  const [currency, setCurrency] = useState('USD'); // State for preferred currency
 
-  // Fetch items from localStorage when the component loads
+  // Fetch preferred currency and items from localStorage
   useEffect(() => {
+    const storedCurrency = JSON.parse(localStorage.getItem('user'))?.currency || 'USD';
     const storedItems = JSON.parse(localStorage.getItem('items')) || [];
+    setCurrency(storedCurrency);
     setItems(storedItems);
   }, []);
 
-  // Handle filter change
+  const currencySymbols = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    JPY: '¥',
+  };
+
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
 
-  // Filtered items based on the selected label
-  const filteredItems = filter
-    ? items.filter((item) => item.label === filter)
-    : items;
-
-  // Handle delete item
   const handleDelete = (index) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       const updatedItems = [...items];
@@ -33,15 +36,17 @@ const ShoppingList = () => {
     }
   };
 
+  const filteredItems = filter
+    ? items.filter((item) => item.label === filter)
+    : items;
+
   return (
-    <div>
+    <div className="shopping-list-container">
       <h2>Shopping List</h2>
-      <Link to="/add-item">Add Item</Link> {/* Link to Add Item Page */}
-      
-      {/* Dropdown to filter items by label */}
-      <div>
-        <label htmlFor="filter">Filter by Label:</label>
-        <select id="filter" value={filter} onChange={handleFilterChange}>
+      <Link to="/add-item" className="add-item-link">Add Item</Link>
+      <div className="filter-container">
+        <label htmlFor="filter" className="filter-label">Filter by Label:</label>
+        <select id="filter" value={filter} onChange={handleFilterChange} className="filter-select">
           <option value="">All</option>
           <option value="Fruit">Fruit</option>
           <option value="Vegetable">Vegetable</option>
@@ -50,24 +55,32 @@ const ShoppingList = () => {
           <option value="Bakery">Bakery</option>
         </select>
       </div>
-
       {filteredItems.length > 0 ? (
-        <ul>
+        <ul className="shopping-list">
           {filteredItems.map((item, index) => (
-            <li key={index}>
-              <strong>{item.name}</strong>
-              {item.label && <span> - <em>{item.label}</em></span>}
-              {item.quantity && <span> | Quantity: {item.quantity}</span>}
-              {item.price && <span> | Price: ${item.price}</span>}
-              <br />
-              {/* Styled Edit and Delete buttons */}
-              <Link to={`/edit-item/${index}`} className="button edit">Edit</Link>
-              <button onClick={() => handleDelete(index)} className="button delete">Delete</button>
+            <li key={index} className="shopping-list-item">
+              <div className="item-details">
+                <strong>{item.name}</strong>
+                {item.label && <span> - <em>{item.label}</em></span>}
+                {item.quantity && <span> | Quantity: {item.quantity}</span>}
+                {item.price && (
+                  <span>
+                    {' | Price: '}
+                    {currencySymbols[currency]}{item.price}
+                  </span>
+                )}
+              </div>
+              <div className="item-actions">
+                <Link to={`/edit-item/${index}`}>
+                  <MyButton variant="info">Edit</MyButton>
+                </Link>
+                <MyButton variant="danger" onClick={() => handleDelete(index)}>Delete</MyButton>
+              </div>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No items found for the selected label.</p>
+        <p className="no-items-message">No items found for the selected label.</p>
       )}
     </div>
   );

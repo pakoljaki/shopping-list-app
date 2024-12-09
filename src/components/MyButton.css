@@ -1,0 +1,10 @@
+.my-button {
+    transition: all 0.3s ease;
+  }
+  
+  .my-button:hover {
+    color: white; /* Text color when hovered */
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly darker background */
+    border-color: transparent; /* Optional: hide border */
+  }
+  

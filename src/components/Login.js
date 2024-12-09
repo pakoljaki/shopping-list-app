@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './Login.css'; // Import CSS for styling
+import MyButton from './MyButton'; // Import MyButton component
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
@@ -22,15 +24,39 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="login-container">
       <h2>Login</h2>
-      <input type="text" name="username" placeholder="Username" onChange={handleChange} required />
-      <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-      <button type="submit">Login</button>
-      <p>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-actions">
+          <MyButton variant="primary" type="submit">Login</MyButton>
+        </div>
+      </form>
+      <p className="register-link">
         Don't have an account? <Link to="/register">Register here</Link>
       </p>
-    </form>
+    </div>
   );
 };
 
